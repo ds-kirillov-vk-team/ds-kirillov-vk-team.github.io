@@ -31,12 +31,13 @@ const VKID = window.VKIDSDK;
 const CLIENT_ID = 52002005;
 const REDIRECT_URL = "https://ds-kirillov-vk-team.github.io/main.html";
 VKID.Config.init({
-  app: CLIENT_ID, // Идентификатор приложения.
-  redirectUrl: REDIRECT_URL, // Адрес для перехода после авторизации.
-  state: "dj29fnsadjsd82", // Произвольная строка состояния приложения.
-  codeVerifier: "FGH767Gd65", // Верификатор в виде случайной строки. Обеспечивает защиту передаваемых данных.
-  //   scope: 'email phone', // Список прав доступа, которые нужны приложению.
-  mode: VKID.ConfigAuthMode.InNewTab, // По умолчанию авторизация открывается в новой вкладке.
+  app: CLIENT_ID,
+  redirectUrl: REDIRECT_URL,
+  state: "dj29fnsadjsd82",
+  codeVerifier: "FGH767Gd65",
+  codeChallenge:
+    "3552ec339a6a2f801a9f3cf92df36374c2784a61e43b76534c58cbd9edf85287",
+  mode: VKID.ConfigAuthMode.InNewTab,
 });
 
 const params = new URL(location).searchParams;

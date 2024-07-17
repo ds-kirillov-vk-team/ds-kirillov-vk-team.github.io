@@ -1,4 +1,6 @@
-console.log("я тут");
+window.addEventListener("message", (data) =>
+  console.log("messageEvent >", data)
+);
 
 const VKID = window.VKIDSDK;
 const CLIENT_ID = 52002005;

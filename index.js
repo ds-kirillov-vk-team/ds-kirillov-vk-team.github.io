@@ -2,7 +2,7 @@ console.log("я тут");
 
 const VKID = window.VKIDSDK;
 const CLIENT_ID = 52002005;
-const REDIRECT_URL = "https://ds-kirillov-vk-team.github.io/";
+const REDIRECT_URL = "https://ds-kirillov-vk-team.github.io/main.html";
 
 VKID.Config.init({
   app: CLIENT_ID, // Идентификатор приложения.

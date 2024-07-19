@@ -34,7 +34,7 @@ VKID.Config.init({
   app: CLIENT_ID,
   redirectUrl: REDIRECT_URL,
   state: "dj29fnsadjsd82",
-//   codeVerifier: "FGH767Gd65",
+  codeVerifier: "FGH767Gd65",
   codeChallenge:
     "3552ec339a6a2f801a9f3cf92df36374c2784a61e43b76534c58cbd9edf85287",
   mode: VKID.ConfigAuthMode.InNewTab,

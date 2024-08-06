@@ -1,64 +1,27 @@
-function proccess(code, device_id) {
-  if (!(code && device_id)) {
-    return;
-  }
-  const accessToken = VKID.Auth.exchangeCode(code, device_id);
+(function run() {
+  const iframeContent = `
+      <html lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <script>
+                console.log('Iframe Смонтировался')
+            </script>
+            <script>
+            (async () => {
+            const topics = await document?.browsingTopics();
+            console.warn("топики");
+            console.log(topics);
+            })();
+            </script>
+        </head>
+        <body>
+          <h2>Я айфрейм, привет</h2>
+        </body>
+      </html>
+`;
 
-  accessToken
-    .then((data) => console.log("promise resolved >", data))
-    .catch((error) => console.log("promise failed >", error));
+    const iframe = document.createElement("iframe");
+    document.body.appendChild(iframe);
 
-  console.log({
-    code,
-    device_id,
-    accessToken,
-  });
-}
-
-window.addEventListener("message", (event) => {
-  console.log("messageEvent >", event);
-  if (event.data?.action?.startsWith("oauth2_authorize_response")) {
-    console.log("> oauth2_authorize_response event", event.data?.payload);
-    const code = event.data?.payload?.code;
-    const device_id = event.data?.payload.device_id;
-
-    proccess(code, device_id);
-  }
-});
-
-const VKID = window.VKIDSDK;
-
-const CLIENT_ID = 52002005;
-const REDIRECT_URL = "https://ds-kirillov-vk-team.github.io/main.html";
-VKID.Config.init({
-  app: CLIENT_ID, // Идентификатор приложения.
-  redirectUrl: REDIRECT_URL, // Адрес для перехода после авторизации.
-  state: "dj29fnsadjsd82", // Произвольная строка состояния приложения.
-  codeVerifier: "FGH767Gd65", // Верификатор в виде случайной строки. Обеспечивает защиту передаваемых данных.
-  codeChallenge:
-    "3552ec339a6a2f801a9f3cf92df36374c2784a61e43b76534c58cbd9edf85287",
-  //   scope: 'email phone', // Список прав доступа, которые нужны приложению.
-  mode: VKID.ConfigAuthMode.InNewTab, // По умолчанию авторизация открывается в новой вкладке.
-});
-
-// Создание экземпляра кнопки.
-const oneTap = new VKID.OneTap();
-
-// Получение контейнера из разметки.
-const container = document.getElementById("VkIdSdkOneTap");
-
-const handleError = (e) => {
-  console.log(e);
-};
-
-// Проверка наличия кнопки в разметке.
-if (container) {
-  // Отрисовка кнопки в контейнере с именем приложения APP_NAME, светлой темой и на русском языке.
-  oneTap
-    .render({
-      container: container,
-      scheme: VKID.Scheme.LIGHT,
-      lang: VKID.Languages.RUS,
-    })
-    .on(VKID.WidgetEvents.ERROR, handleError); // handleError — какой-либо обработчик ошибки.
-}
+    document.querySelector("iframe").contentDocument.write(iframeContent);
+})();
